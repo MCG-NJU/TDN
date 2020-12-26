@@ -55,20 +55,20 @@ Here we provide some off-the-shelf [pretrained models](https://drive.google.com/
 #### Something-Something-V1
 
 Model  | Frames $\times$ Crops $\times$ Clips  | Top-1  | Top-5 | checkpoint
-:--: | :--: | :--: | :--:| :--:| :--:
+:--: | :--: | :--: | :--:| :--:
 TDN-ResNet50  | 8 $\times$ 1 $\times$ 1 | 52.3%  | 80.6% | [link](https://drive.google.com/file/d/13PeSkxDgYZ_Z-OOYiuCY3J_QlY2noUuv/view?usp=sharing)
 TDN-ResNet50  | 16 $\times$ 1 $\times$ 1 | 53.9%  | 82.1% | [link](https://drive.google.com/file/d/1IxUMglMEET8blZxzJrq7sc79MyosJ52I/view?usp=sharing)
 
 #### Something-Something-V2
 
 Model  | Frames $\times$ Crops $\times$ Clips | Top-1  | Top-5 | checkpoint
-:--: | :--: | :--: | :--:| :--:| :--:
+:--: | :--: | :--: | :--:| :--:
 TDN-ResNet50  | 8 $\times$ 1 $\times$ 1   | 64.0%   | 88.8%  | [link]()
 TDN-ResNet50  | 16 $\times$ 1 $\times$ 1  | 65.3%   | 89.7%  | [link](https://drive.google.com/file/d/1pwkrPYUc36b5SnPRHUbOcycm4zoQHZnR/view?usp=sharing)
 
 #### Kinetics400
 Model  | Frames $\times$ Crops $\times$ Clips   | Top-1 (30 view)  | Top-5 (30 view)  | checkpoint
-:--: | :--: | :--: | :--:| :--:| :--: 
+:--: | :--: | :--: | :--:| :--:
 TDN-ResNet50    | 8 $\times$ 3 $\times$ 10  | 76.6%  | 92.8%  | [link](https://drive.google.com/file/d/1h-yoGaQYpRoSb57-sw_Iw7mYkSrI5QnQ/view?usp=sharing)
 TDN-ResNet50    | 16 $\times$ 3 $\times$ 10 | 77.5%  | 93.2%  | [link](https://drive.google.com/file/d/1M6nkUISaIfLAxuabA3_JxPUiXqnLv26T/view?usp=sharing)
 TDN-ResNet101   | 8  $\times$ 3 $\times$ 10 | 77.5%  | 93.6%  | [link]()
