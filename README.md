@@ -29,7 +29,7 @@ The code is built with following libraries:
 We have successfully trained TDN on [Kinetics400](https://deepmind.com/research/open-source/kinetics), [UCF101](https://www.crcv.ucf.edu/data/UCF101.php), [HMDB51](https://serre-lab.clps.brown.edu/resource/hmdb-a-large-human-motion-database/), [Something-Something-V1](https://20bn.com/datasets/something-something/v1) and [V2](https://20bn.com/datasets/something-something/v2) with this codebase.  
 - The processing of Something-Something-V1 & V2 can be summarized into 3 steps:  
     1. Extract frames from videos(you can use ffmpeg to get frames from video)      
-    2. Generate annotations needed for dataloader ("<path_to_frames> <frames_num> <video_class>" in annotations) The annotation usually includes train.txt amd val.txt. The format of *.txt file is like:
+    2. Generate annotations needed for dataloader ("<path_to_frames> <frames_num> <video_class>" in annotations) The annotation usually includes train.txt and val.txt. The format of *.txt file is like:
         ```
         frames/video_1 num_frames label_1
         frames/video_2 num_frames label_2
@@ -40,7 +40,7 @@ We have successfully trained TDN on [Kinetics400](https://deepmind.com/research/
     3. Add the information to ops/dataset_configs.py  
 
 - The processing of Kinetics400 can be summarized into 2 steps:  
-    1. Generate annotations needed for dataloader ("<path_to_video> <video_class>" in annotations) The annotation usually includes train.txt amd val.txt. The format of *.txt file is like:
+    1. Generate annotations needed for dataloader ("<path_to_video> <video_class>" in annotations) The annotation usually includes train.txt and val.txt. The format of *.txt file is like:
         ```
         frames/video_1.mp4  label_1
         frames/video_2.mp4  label_2
