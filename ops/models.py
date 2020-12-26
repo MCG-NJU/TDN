@@ -8,9 +8,7 @@ from torch import nn
 from ops.basic_ops import ConsensusModule
 from ops.transforms import *
 from torch.nn.init import normal_, constant_
-import logging
 from ops.tdn_net import tdn_net
-logger = logging.getLogger(__name__)
 
 class TSN(nn.Module):
     def __init__(self, num_class, num_segments, modality,
@@ -40,7 +38,7 @@ class TSN(nn.Module):
         else:
             self.new_length = new_length
         if print_spec:
-            logger.info(("""
+            print(("""
     Initializing TSN with base model: {}.
     TSN Configurations:
         input_modality:     {}
@@ -84,7 +82,7 @@ class TSN(nn.Module):
         return feature_dim
 
     def _prepare_base_model(self, base_model, num_segments):
-        logger.info(('=> base model: {}'.format(base_model)))
+        print(('=> base model: {}'.format(base_model)))
         if 'resnet' in base_model :
             self.base_model = tdn_net(base_model, num_segments)
             self.base_model.last_layer_name = 'fc'
@@ -217,10 +215,7 @@ class TSN(nn.Module):
             base_out = self.softmax(base_out)
 
         if self.reshape:
-            if self.is_shift and self.temporal_pool:
-                base_out = base_out.view((-1, self.num_segments // 2) + base_out.size()[1:])
-            else:
-                base_out = base_out.view((-1, self.num_segments) + base_out.size()[1:])
+            base_out = base_out.view((-1, self.num_segments) + base_out.size()[1:])
             output = self.consensus(base_out)
 
             return output.squeeze(1)

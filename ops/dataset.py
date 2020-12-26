@@ -10,7 +10,6 @@ import os
 import numpy as np
 from numpy.random import randint
 
-
 class VideoRecord(object):
     def __init__(self, row):
         self._data = row

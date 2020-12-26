@@ -6,7 +6,6 @@
 import os
 ROOT_DATASET = '/ssd/video/' 
 
-
 def return_ucf101(modality):
     filename_categories = 101
     if modality == 'RGB':

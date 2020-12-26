@@ -46,14 +46,14 @@ def main():
         args.store_name += '_dense'
     if args.suffix is not None:
         args.store_name += '_{}'.format(args.suffix)
-    print('storing name: ' + args.store_name)
 
     if dist.get_rank() == 0:
         check_rootfolders()
 
     logger = setup_logger(output=os.path.join(args.root_log, args.store_name),
                           distributed_rank=dist.get_rank(),
-                          name=f'TDN-{args.arch}')
+                          name=f'TDN')
+    logger.info('storing name: ' + args.store_name)
 
     model = TSN(num_class,
                 args.num_segments,
