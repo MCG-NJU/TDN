@@ -78,7 +78,9 @@ TDN-ResNet101   | 16 $\times$ 3 $\times$ 10 | 78.5%  | 93.9%  | [link](https://d
 - For center crop single clip, the processing of testing can be summarized into 2 steps:
     1. Run the following testing scripts:
         ```
-        CUDA_VISIBLE_DEVICES=0 python3 test_models_center_crop.py something --archs='resnet50' --weights <your_checkpoint_path>  --test_segments=8  --test_crops=1 --batch_size=16 --clip_index=1  --output_dir <your_pkl_path>  
+        CUDA_VISIBLE_DEVICES=0 python3 test_models_center_crop.py something \
+        --archs='resnet50' --weights <your_checkpoint_path>  --test_segments=8  \
+        --test_crops=1 --batch_size=16 --output_dir <your_pkl_path> -j 4 --clip_index=1
         ```
     2. Run the following scripts to ensemble the raw score of the 30 views:
         ```
@@ -87,7 +89,10 @@ TDN-ResNet101   | 16 $\times$ 3 $\times$ 10 | 78.5%  | 93.9%  | [link](https://d
 - For 3 crops, 10 clips, the processing of testing can be summarized into 2 steps: 
     1. Run the following testing scripts for 10 times(clip_index from 0 to 9):
         ``` 
-        CUDA_VISIBLE_DEVICES=0 python3 test_models_three_crops.py  kinetics --archs='resnet50' --weights <your_checkpoint_path>  --test_segments=8 --test_crops=3 --batch_size=16 --full_res --gpus --output_dir <your_pkl_path>  -j 4 --clip_index <your_clip_index_>
+        CUDA_VISIBLE_DEVICES=0 python3 test_models_three_crops.py  kinetics \
+        --archs='resnet50' --weights <your_checkpoint_path>  --test_segments=8 \
+        --test_crops=3 --batch_size=16 --full_res --gpus --output_dir <your_pkl_path>  \
+        -j 4 --clip_index <your_clip_index>
         ```
     2. Run the following scripts to ensemble the raw score of the 30 views:
         ```
