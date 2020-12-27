@@ -82,7 +82,7 @@ TDN-ResNet101   | 16 $\times$ 3 $\times$ 10 | 78.5%  | 93.9%  | [link](https://d
         --archs='resnet50' --weights <your_checkpoint_path>  --test_segments=8  \
         --test_crops=1 --batch_size=16 --output_dir <your_pkl_path> -j 4 --clip_index=1
         ```
-    2. Run the following scripts to ensemble the raw score of the 30 views:
+    2. Run the following scripts to get result from the raw score:
         ```
         python3 pkl_to_results.py --num_clips 1 --test_crops 1 --output_dir <your_pkl_path>  
         ```
