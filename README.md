@@ -54,25 +54,25 @@ We have successfully trained TDN on [Kinetics400](https://deepmind.com/research/
 Here we provide some off-the-shelf [pretrained models](https://drive.google.com/drive/folders/1du1KtjFANeD0Mr5_7RxCx0jLUVRj_y8w?usp=sharing). The accuracy might vary a little bit compared to the [paper]((https://arxiv.org/abs/2012.10071)), since the raw video of Kinetics downloaded by users may have some differences. 
 #### Something-Something-V1
 
-Model  | Frames $\times$ Crops $\times$ Clips  | Top-1  | Top-5 | checkpoint
+Model  | Frames x Crops x Clips  | Top-1  | Top-5 | checkpoint
 :--: | :--: | :--: | :--:| :--:
-TDN-ResNet50  | 8 $\times$ 1 $\times$ 1 | 52.3%  | 80.6% | [link](https://drive.google.com/file/d/13PeSkxDgYZ_Z-OOYiuCY3J_QlY2noUuv/view?usp=sharing)
-TDN-ResNet50  | 16 $\times$ 1 $\times$ 1 | 53.9%  | 82.1% | [link](https://drive.google.com/file/d/1IxUMglMEET8blZxzJrq7sc79MyosJ52I/view?usp=sharing)
+TDN-ResNet50  | 8x1x1 | 52.3%  | 80.6% | [link](https://drive.google.com/file/d/13PeSkxDgYZ_Z-OOYiuCY3J_QlY2noUuv/view?usp=sharing)
+TDN-ResNet50  | 16x1x1 | 53.9%  | 82.1% | [link](https://drive.google.com/file/d/1IxUMglMEET8blZxzJrq7sc79MyosJ52I/view?usp=sharing)
 
 #### Something-Something-V2
 
-Model  | Frames $\times$ Crops $\times$ Clips | Top-1  | Top-5 | checkpoint
+Model  | Frames x Crops x Clips | Top-1  | Top-5 | checkpoint
 :--: | :--: | :--: | :--:| :--:
-TDN-ResNet50  | 8 $\times$ 1 $\times$ 1   | 64.0%   | 88.8%  | [link]()
-TDN-ResNet50  | 16 $\times$ 1 $\times$ 1  | 65.3%   | 89.7%  | [link](https://drive.google.com/file/d/1pwkrPYUc36b5SnPRHUbOcycm4zoQHZnR/view?usp=sharing)
+TDN-ResNet50  | 8x1x1   | 64.0%   | 88.8%  | [link](https://drive.google.com/file/d/1cPgY2h6zVdjKrFJu-ZV_uo_8HKLPh_Vu/view?usp=sharing)
+TDN-ResNet50  | 16x1x1  | 65.3%   | 89.7%  | [link](https://drive.google.com/file/d/1pwkrPYUc36b5SnPRHUbOcycm4zoQHZnR/view?usp=sharing)
 
 #### Kinetics400
-Model  | Frames $\times$ Crops $\times$ Clips   | Top-1 (30 view)  | Top-5 (30 view)  | checkpoint
+Model  | Frames x Crops x Clips   | Top-1 (30 view)  | Top-5 (30 view)  | checkpoint
 :--: | :--: | :--: | :--:| :--:
-TDN-ResNet50    | 8 $\times$ 3 $\times$ 10  | 76.6%  | 92.8%  | [link](https://drive.google.com/file/d/1h-yoGaQYpRoSb57-sw_Iw7mYkSrI5QnQ/view?usp=sharing)
-TDN-ResNet50    | 16 $\times$ 3 $\times$ 10 | 77.5%  | 93.2%  | [link](https://drive.google.com/file/d/1M6nkUISaIfLAxuabA3_JxPUiXqnLv26T/view?usp=sharing)
-TDN-ResNet101   | 8  $\times$ 3 $\times$ 10 | 77.5%  | 93.6%  | [link]()
-TDN-ResNet101   | 16 $\times$ 3 $\times$ 10 | 78.5%  | 93.9%  | [link](https://drive.google.com/file/d/1MWj3srcdJginXCZfE6P4ufPRpLbUZe-Z/view?usp=sharing)
+TDN-ResNet50    | 8x3x10  | 76.6%  | 92.8%  | [link](https://drive.google.com/file/d/1h-yoGaQYpRoSb57-sw_Iw7mYkSrI5QnQ/view?usp=sharing)
+TDN-ResNet50    | 16x3x10 | 77.5%  | 93.2%  | [link](https://drive.google.com/file/d/1M6nkUISaIfLAxuabA3_JxPUiXqnLv26T/view?usp=sharing)
+TDN-ResNet101   | 8x3x10 | 77.5%  | 93.6%  | [link](https://drive.google.com/file/d/1UdvGQkBkC9vqOwknXbyuuTVDTp1ctOr4/view?usp=sharing)
+TDN-ResNet101   | 16x3x10 | 78.5%  | 93.9%  | [link](https://drive.google.com/file/d/1MWj3srcdJginXCZfE6P4ufPRpLbUZe-Z/view?usp=sharing)
 
 ## Testing
 - For center crop single clip, the processing of testing can be summarized into 2 steps:
