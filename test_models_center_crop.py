@@ -40,7 +40,6 @@ parser.add_argument('-j', '--workers', default=8, type=int, metavar='N',
 # for true test
 parser.add_argument('--test_list', type=str, default=None)
 parser.add_argument('--csv_file', type=str, default=None)
-
 parser.add_argument('--softmax', default=False, action="store_true", help='use softmax')
 
 parser.add_argument('--max_num', type=int, default=-1)
@@ -50,15 +49,7 @@ parser.add_argument('--gpus', nargs='+', type=int, default=None)
 parser.add_argument('--img_feature_dim',type=int, default=256)
 parser.add_argument('--num_set_segments',type=int, default=1,help='TODO: select multiply set of n-frames from a video')
 parser.add_argument('--pretrain', type=str, default='imagenet')
-
-
-# add model params
-parser.add_argument('--shift', default=True, action="store_true", help='use shift for models')
-parser.add_argument('--shift_div', default=8, type=int, help='number of div for shift (default: 8)')
-parser.add_argument('--shift_place', default='blockres', type=str, help='place for shift (default: stageres)')
-
 parser.add_argument('--clip_index', type=int, default=0)
-
 parser.add_argument('--output_dir',type=str,default="./result_file_0605_center16_ssv2",help='directory for pkl')
 args = parser.parse_args()
 
@@ -115,16 +106,12 @@ arch_list = args.archs.split('.')
 
 total_num = None
 for this_weights, this_test_segments, test_file, modality, this_arch in zip(weights_list, test_segments_list, test_file_list, modality_list, arch_list):
-    is_shift = args.shift
-    shift_div = args.shift_div
-    shift_place = args.shift_place
     num_class, args.train_list, val_list, root_path, prefix = dataset_config.return_dataset(args.dataset,modality)
     net = TSN(num_class, this_test_segments, modality,
               base_model=this_arch,
               consensus_type=args.crop_fusion_type,
               img_feature_dim=args.img_feature_dim,
-              pretrain=args.pretrain,
-              is_shift=is_shift, shift_div=shift_div, shift_place=shift_place
+              pretrain=args.pretrain
               )
 
     checkpoint = torch.load(this_weights)
@@ -213,10 +200,9 @@ def eval_video(video_data, net, this_test_segments, modality):
 
         start_time = time.time()
         data_in = data.view(-1, length*5, data.size(2), data.size(3))
-        if is_shift:
-            data_in = data_in.view(batch_size , num_crop, this_test_segments, length*5, data_in.size(2), data_in.size(3))
-            data_in0 = data_in[:,0,:,:,:,:]
-            data_in0 = data_in0.view(batch_size , 1, this_test_segments, length*5, data.size(2), data.size(3))
+        data_in = data_in.view(batch_size , num_crop, this_test_segments, length*5, data_in.size(2), data_in.size(3))
+        data_in0 = data_in[:,0,:,:,:,:]
+        data_in0 = data_in0.view(batch_size , 1, this_test_segments, length*5, data.size(2), data.size(3))
         rst0 = net(data_in0)
         rst0 = rst0.reshape(batch_size, 1, -1)
                 
@@ -228,10 +214,7 @@ def eval_video(video_data, net, this_test_segments, modality):
         inference_time = time.time() - start_time
         rst0 = rst0.data.cpu().numpy().copy()
 
-        if net.module.is_shift:
-            rst0 = rst0.reshape(batch_size, num_class)
-        else:
-            rst0 = rst0.reshape((batch_size, -1, num_class)).mean(axis=1).reshape((batch_size, num_class))
+        rst0 = rst0.reshape((batch_size, -1, num_class)).mean(axis=1).reshape((batch_size, num_class))
 
         return i, rst0,0,0, label, inference_time
 
