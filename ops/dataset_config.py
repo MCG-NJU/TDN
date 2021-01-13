@@ -64,7 +64,7 @@ def return_somethingv2(modality):
         root_data = "/"
         filename_imglist_train = "/your_path_to/something-something-v2-train_list.txt"
         filename_imglist_val = "/your_path_to/something-something-v2-val_list.txt"
-        prefix = 'image_{:05d}.jpg'#'{:05d}.jpg'
+        prefix = '{:06d}.jpg'
     elif modality == 'Flow':
         root_data = ROOT_DATASET + 'something/v2/20bn-something-something-v2-flow'
         filename_imglist_train = 'something/v2/train_videofolder_flow.txt'

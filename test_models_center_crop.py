@@ -160,7 +160,7 @@ for this_weights, this_test_segments, test_file, modality, this_arch in zip(weig
     )
 
     if args.gpus is not None:
-        devices = [args.gpus[i] for i in range(args.workers)]
+        devices = [args.gpus[i%len(args.gpus)] for i in range(args.workers)]
     else:
         devices = list(range(args.workers))
 

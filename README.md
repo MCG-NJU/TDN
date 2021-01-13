@@ -80,7 +80,7 @@ TDN-ResNet101   | 16x3x10 | 78.5%  | 93.9%  | [link](https://drive.google.com/fi
         ```
         CUDA_VISIBLE_DEVICES=0 python3 test_models_center_crop.py something \
         --archs='resnet50' --weights <your_checkpoint_path>  --test_segments=8  \
-        --test_crops=1 --batch_size=16 --output_dir <your_pkl_path> -j 4 --clip_index=1
+        --test_crops=1 --batch_size=16  --gpus 0 --output_dir <your_pkl_path> -j 4 --clip_index=1
         ```
     2. Run the following scripts to get result from the raw score:
         ```
@@ -91,7 +91,7 @@ TDN-ResNet101   | 16x3x10 | 78.5%  | 93.9%  | [link](https://drive.google.com/fi
         ``` 
         CUDA_VISIBLE_DEVICES=0 python3 test_models_three_crops.py  kinetics \
         --archs='resnet50' --weights <your_checkpoint_path>  --test_segments=8 \
-        --test_crops=3 --batch_size=16 --full_res --gpus --output_dir <your_pkl_path>  \
+        --test_crops=3 --batch_size=16 --full_res --gpus 0 --output_dir <your_pkl_path>  \
         -j 4 --clip_index <your_clip_index>
         ```
     2. Run the following scripts to ensemble the raw score of the 30 views:
