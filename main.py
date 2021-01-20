@@ -217,7 +217,7 @@ def main():
 
         if (epoch + 1) % args.eval_freq == 0 or epoch == args.epochs - 1:
             val_loader.sampler.set_epoch(epoch)
-            prec1, prec5, val_loss = validate(val_loader, model, criterion, epoch, logger)
+            prec1, prec5, val_loss = validate(val_loader, model, criterion, logger)
             if dist.get_rank() == 0:
                 tf_writer.add_scalar('loss/test', val_loss, epoch)
                 tf_writer.add_scalar('acc/test_top1', prec1, epoch)
