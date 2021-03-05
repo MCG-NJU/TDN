@@ -132,17 +132,18 @@ class TSNDataSet(data.Dataset):
             return offsets + 1
 
     def _get_test_indices(self, video_list):
-        if self.dense_sample:
+        if self.dense_sample:  # i3d dense sample
             sample_pos = max(1, 1 + len(video_list) - 64)
             t_stride = 64 // self.num_segments
-            start_list = np.linspace(0, sample_pos - 1, num=10, dtype=int)
-            offsets = []
-            for start_idx in start_list.tolist():
-                offsets += [(idx * t_stride + start_idx) % len(video_list) for idx in range(self.num_segments)]
+            start_idx = 0 if sample_pos == 1 else np.random.randint(0, sample_pos - 1)
+            offsets = [(idx * t_stride + start_idx) % len(video_list) for idx in range(self.num_segments)]
             return np.array(offsets) + 1
         else:
-            tick = (len(video_list) - self.new_length + 1) / float(self.num_segments)
-            offsets = np.array([int(tick / 2.0*self.clip_index + tick * x) for x in range(self.num_segments)])
+            if len(video_list) > self.num_segments + self.new_length - 1:
+                tick = (len(video_list) - self.new_length + 1) / float(self.num_segments)
+                offsets = np.array([int(tick / 2.0 + tick * x) for x in range(self.num_segments)])
+            else:
+                offsets = np.zeros((self.num_segments,))
             return offsets + 1
 
     def __getitem__(self, index):

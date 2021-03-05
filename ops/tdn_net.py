@@ -19,15 +19,16 @@ class TDN_Net(nn.Module):
         self.conv1 = list(resnet_model.children())[0]
         self.bn1 = list(resnet_model.children())[1]
         self.relu = nn.ReLU(inplace=True)
-        self.conv1_temp = list(resnet_model1.children())[0]
-        self.conv1_temp1 = list(resnet_model1.children())[0]
         
+        # implement conv1_5 and inflate weight 
+        self.conv1_temp = list(resnet_model1.children())[0]
         params = [x.clone() for x in self.conv1_temp.parameters()]
         kernel_size = params[0].size()
         new_kernel_size = kernel_size[:1] + (3 * 4,) + kernel_size[2:]
         new_kernels = params[0].data.mean(dim=1, keepdim=True).expand(new_kernel_size).contiguous()
         self.conv1_5 = nn.Sequential(nn.Conv2d(12,64,kernel_size=7,stride=2,padding=3,bias=False),nn.BatchNorm2d(64),nn.ReLU(inplace=True))
         self.conv1_5[0].weight.data = new_kernels
+
         self.maxpool_diff = nn.MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
         self.resnext_layer1 =nn.Sequential(*list(resnet_model1.children())[4])
         self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
