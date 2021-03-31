@@ -159,6 +159,8 @@ class TSNDataSet(data.Dataset):
                 directory = record.path
                 if directory[-4:] != ".mp4":
                     video_path = directory+".mp4"
+                else:
+                    video_path = directory
                 video_list = decord.VideoReader(video_path)
             except UnicodeDecodeError:
                 decode_boo = False

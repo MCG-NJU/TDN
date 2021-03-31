@@ -117,6 +117,9 @@ This implementation supports multi-gpu, `DistributedDataParallel` training, whic
             --lr_scheduler step  --lr_steps 50 75 90 --epochs 100 --batch-size 16 \
             --wd 1e-4 --dropout 0.5 --consensus_type=avg --eval-freq=1 -j 4 --npb 
     ```
+## Contact
+tongzhan@smail.nju.edu.cn
+
 ## Acknowledgements
 We especially thank the contributors of the [TSN](https://github.com/yjxiong/tsn-pytorch) and [TSM](https://github.com/mit-han-lab/temporal-shift-module) codebase for providing helpful code.
 ## License

@@ -115,10 +115,7 @@ for this_weights, this_test_segments, test_file, modality, this_arch in zip(weig
               )
 
     checkpoint = torch.load(this_weights)
-    checkpoint = checkpoint['state_dict']
-
-    base_dict = {'.'.join(k.split('.')[1:]): v for k, v in list(checkpoint.items())}
-    net.load_state_dict(base_dict)
+    net.load_state_dict(checkpoint['state_dict'])
 
     input_size = net.scale_size if args.full_res else net.input_size
     if args.test_crops == 1:
