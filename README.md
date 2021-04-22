@@ -30,7 +30,7 @@ The code is built with following libraries:
 
 ## Data Preparation
 We have successfully trained TDN on [Kinetics400](https://deepmind.com/research/open-source/kinetics), [UCF101](https://www.crcv.ucf.edu/data/UCF101.php), [HMDB51](https://serre-lab.clps.brown.edu/resource/hmdb-a-large-human-motion-database/), [Something-Something-V1](https://20bn.com/datasets/something-something/v1) and [V2](https://20bn.com/datasets/something-something/v2) with this codebase.  
-- The processing of Something-Something-V1 & V2 can be summarized into 3 steps:  
+- The processing of **Something-Something-V1 & V2** can be summarized into 3 steps:
     1. Extract frames from videos(you can use ffmpeg to get frames from video)      
     2. Generate annotations needed for dataloader ("<path_to_frames> <frames_num> <video_class>" in annotations) The annotation usually includes train.txt and val.txt. The format of *.txt file is like:
         ```
@@ -42,8 +42,9 @@ We have successfully trained TDN on [Kinetics400](https://deepmind.com/research/
         ```
     3. Add the information to `ops/dataset_configs.py`.
 
-- The processing of Kinetics400 can be summarized into 2 steps:  
-    1. Generate annotations needed for dataloader ("<path_to_video> <video_class>" in annotations) The annotation usually includes train.txt and val.txt. The format of *.txt file is like:
+- The processing of **Kinetics400** can be summarized into 3 steps:
+    1. We preprocess our data by resizing the short edge of video to 320px. You can refer to [MMAction2 Data Benchmark](https://github.com/open-mmlab/mmaction2) for [TSN](https://github.com/open-mmlab/mmaction2/tree/master/configs/recognition/tsn#kinetics-400-data-benchmark-8-gpus-resnet50-imagenet-pretrain-3-segments) and [SlowOnly](https://github.com/open-mmlab/mmaction2/tree/master/configs/recognition/slowonly#kinetics-400-data-benchmark).
+    2. Generate annotations needed for dataloader ("<path_to_video> <video_class>" in annotations) The annotation usually includes train.txt and val.txt. The format of *.txt file is like:
         ```
         dataset_root/video_1.mp4  label_1
         dataset_root/video_2.mp4  label_2
@@ -51,7 +52,10 @@ We have successfully trained TDN on [Kinetics400](https://deepmind.com/research/
         ...
         dataset_root/video_N.mp4  label_N
         ```
-    2. Add the information to `ops/dataset_configs.py`.
+    3. Add the information to `ops/dataset_configs.py`.
+
+    **Note**:
+    We use [decord](https://github.com/dmlc/decord) to decode the Kinetics videos **on the fly**.
 
 ## Model Zoo
 Here we provide some off-the-shelf [pretrained models](https://drive.google.com/drive/folders/18JslcTMTrjXJPn-I7Dnof1GKj4J6cOE1?usp=sharing). The accuracy might vary a little bit compared to the [paper]((https://arxiv.org/abs/2012.10071)), since the raw video of Kinetics downloaded by users may have some differences. 
