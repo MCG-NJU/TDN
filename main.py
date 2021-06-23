@@ -13,6 +13,7 @@ import torch.backends.cudnn as cudnn
 import torch.optim
 from torch.nn.utils import clip_grad_norm_
 from ops.dataset import TSNDataSet
+from ops.dataset_cv2 import TSNDataSet_Cv2
 from ops.models import TSN
 from ops.transforms import *
 from ops.logger import setup_logger
@@ -25,7 +26,7 @@ from tensorboardX import SummaryWriter
 from torch.utils.data import *
 import torchvision
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '0,1,2,3,4,5,6,7'
+os.environ['CUDA_VISIBLE_DEVICES'] = '0,1' # 0,1,2,3,4,5,6,7
 
 best_prec1 = 0
 
@@ -84,8 +85,15 @@ def main():
 
     # Data loading code
     normalize = GroupNormalize(input_mean, input_std)
+    if args.decoded_type=="opencv":
+        DataSet = TSNDataSet_Cv2
+    elif args.decoded_type=="decord":
+        DataSet = TSNDataSet
+    else:
+        pass
+    logger.info(("=> decoded_type '{}'".format(args.decoded_type)))
 
-    train_dataset = TSNDataSet(
+    train_dataset = DataSet(
         args.dataset,
         args.root_path,
         args.train_list,
@@ -104,7 +112,7 @@ def main():
         batch_size=args.batch_size, num_workers=args.workers,
         pin_memory=True, sampler=train_sampler,drop_last=True)  
 
-    val_dataset = TSNDataSet(
+    val_dataset = DataSet(
         args.dataset,
         args.root_path,
         args.val_list,
