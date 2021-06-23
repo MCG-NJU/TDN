@@ -12,6 +12,7 @@ parser.add_argument('--train_list', type=str, default="")
 parser.add_argument('--val_list', type=str, default="")
 parser.add_argument('--root_path', type=str, default="")
 parser.add_argument('--store_name', type=str, default="")
+parser.add_argument('--decoded_type', type=str, default="decord",  choices=['decord','opencv'])
 # ========================= Model Configs ==========================
 parser.add_argument('--arch', type=str, default="resnet50")
 parser.add_argument('--num_segments', type=int, default=3)
