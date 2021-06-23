@@ -1,0 +1,6 @@
+decord
+tqdm
+easydict
+tensorboardX
+scikit-learn
+opencv-python==3.4.4.19
