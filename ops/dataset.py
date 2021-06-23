@@ -4,11 +4,12 @@
 # tongzhan@smail.nju.edu.cn
 
 import torch.utils.data as data
-import decord
+# import decord
 from PIL import Image
 import os
 import numpy as np
 from numpy.random import randint
+import cv2
 
 class VideoRecord(object):
     def __init__(self, row):
@@ -77,30 +78,30 @@ class TSNDataSet(data.Dataset):
 
     def _sample_indices(self, video_list):
         if not self.I3D_sample : # TSN uniformly sampling for TDN
-            if((len(video_list) - self.new_length + 1) < self.num_segments):
-                average_duration = (len(video_list) - 5 + 1) // (self.num_segments)
+            if((video_list - self.new_length + 1) < self.num_segments):
+                average_duration = (video_list - 5 + 1) // (self.num_segments)
             else:
-                average_duration = (len(video_list) - self.new_length + 1) // (self.num_segments)
+                average_duration = (video_list - self.new_length + 1) // (self.num_segments)
             offsets = []
             if average_duration > 0:
                 offsets += list(np.multiply(list(range(self.num_segments)), average_duration) + randint(average_duration,size=self.num_segments))
-            elif len(video_list) > self.num_segments:
-                if((len(video_list) - self.new_length + 1) >= self.num_segments):
-                    offsets += list(np.sort(randint(len(video_list) - self.new_length + 1, size=self.num_segments)))
+            elif video_list > self.num_segments:
+                if((video_list - self.new_length + 1) >= self.num_segments):
+                    offsets += list(np.sort(randint(video_list - self.new_length + 1, size=self.num_segments)))
                 else:
-                    offsets += list(np.sort(randint(len(video_list) - 5 + 1, size=self.num_segments)))
+                    offsets += list(np.sort(randint(video_list - 5 + 1, size=self.num_segments)))
             else:
                 offsets += list(np.zeros((self.num_segments,)))
             offsets = np.array(offsets)
             return offsets + 1
         elif self.dataset == 'kinetics' and self.I3D_sample and (not self.dense_sample) : # i3d type sampling for training
-            sample_pos = max(1, 1 + len(video_list) - self.new_length - 64)
+            sample_pos = max(1, 1 + video_list - self.new_length - 64)
             t_stride = 64 // self.num_segments
             start_idx1 = 0 if sample_pos == 1 else np.random.randint(0, sample_pos - 1)
-            offsets = [(idx * t_stride + start_idx1) % len(video_list) for idx in range(self.num_segments)]
+            offsets = [(idx * t_stride + start_idx1) % video_list for idx in range(self.num_segments)]
             return np.array(offsets) + 1
         elif self.dense_sample:  # i3d dense sample for test
-            sample_pos = max(1, 1 + len(video_list) - self.new_length - 64)
+            sample_pos = max(1, 1 + video_list - self.new_length - 64)
             t_stride = 64 // self.num_segments
             start_idx1 = 0 if sample_pos == 1 else np.random.randint(0, sample_pos - 1)
             start_idx2 = 0 if sample_pos == 1 else np.random.randint(0, sample_pos - 1)
@@ -112,20 +113,20 @@ class TSNDataSet(data.Dataset):
             start_idx8 = 0 if sample_pos == 1 else np.random.randint(0, sample_pos - 1)
             start_idx9 = 0 if sample_pos == 1 else np.random.randint(0, sample_pos - 1)
             start_idx10 = 0 if sample_pos == 1 else np.random.randint(0, sample_pos - 1)
-            offsets = [(idx * t_stride + start_idx1) % len(video_list) for idx in range(self.num_segments)]+[(idx * t_stride + start_idx2) % len(video_list) for idx in range(self.num_segments)]+[(idx * t_stride + start_idx3) % len(video_list) for idx in range(self.num_segments)]+[(idx * t_stride + start_idx4) % len(video_list) for idx in range(self.num_segments)]+[(idx * t_stride + start_idx5) % len(video_list) for idx in range(self.num_segments)]+[(idx * t_stride + start_idx6) % len(video_list) for idx in range(self.num_segments)]+[(idx * t_stride + start_idx7) % len(video_list) for idx in range(self.num_segments)]+[(idx * t_stride + start_idx8) % len(video_list) for idx in range(self.num_segments)]+[(idx * t_stride + start_idx9) % len(video_list) for idx in range(self.num_segments)]+[(idx * t_stride + start_idx10) % len(video_list) for idx in range(self.num_segments)]
+            offsets = [(idx * t_stride + start_idx1) % video_list for idx in range(self.num_segments)]+[(idx * t_stride + start_idx2) % video_list for idx in range(self.num_segments)]+[(idx * t_stride + start_idx3) % video_list for idx in range(self.num_segments)]+[(idx * t_stride + start_idx4) % video_list for idx in range(self.num_segments)]+[(idx * t_stride + start_idx5) % video_list for idx in range(self.num_segments)]+[(idx * t_stride + start_idx6) % video_list for idx in range(self.num_segments)]+[(idx * t_stride + start_idx7) % video_list for idx in range(self.num_segments)]+[(idx * t_stride + start_idx8) % video_list for idx in range(self.num_segments)]+[(idx * t_stride + start_idx9) % video_list for idx in range(self.num_segments)]+[(idx * t_stride + start_idx10) % video_list for idx in range(self.num_segments)]
             return np.array(offsets) + 1
 
 
     def _get_val_indices(self, video_list):
         if self.dense_sample:  # i3d dense sample
-            sample_pos = max(1, 1 + len(video_list) - 64)
+            sample_pos = max(1, 1 + video_list - 64)
             t_stride = 64 // self.num_segments
             start_idx = 0 if sample_pos == 1 else np.random.randint(0, sample_pos - 1)
-            offsets = [(idx * t_stride + start_idx) % len(video_list) for idx in range(self.num_segments)]
+            offsets = [(idx * t_stride + start_idx) % video_list for idx in range(self.num_segments)]
             return np.array(offsets) + 1
         else:
-            if len(video_list) > self.num_segments + self.new_length - 1:
-                tick = (len(video_list) - self.new_length + 1) / float(self.num_segments)
+            if video_list > self.num_segments + self.new_length - 1:
+                tick = (video_list - self.new_length + 1) / float(self.num_segments)
                 offsets = np.array([int(tick / 2.0 + tick * x) for x in range(self.num_segments)])
             else:
                 offsets = np.zeros((self.num_segments,))
@@ -133,14 +134,14 @@ class TSNDataSet(data.Dataset):
 
     def _get_test_indices(self, video_list):
         if self.dense_sample:  # i3d dense sample
-            sample_pos = max(1, 1 + len(video_list) - 64)
+            sample_pos = max(1, 1 + video_list - 64)
             t_stride = 64 // self.num_segments
             start_idx = 0 if sample_pos == 1 else np.random.randint(0, sample_pos - 1)
-            offsets = [(idx * t_stride + start_idx) % len(video_list) for idx in range(self.num_segments)]
+            offsets = [(idx * t_stride + start_idx) % video_list for idx in range(self.num_segments)]
             return np.array(offsets) + 1
         else:
-            if len(video_list) > self.num_segments + self.new_length - 1:
-                tick = (len(video_list) - self.new_length + 1) / float(self.num_segments)
+            if video_list > self.num_segments + self.new_length - 1:
+                tick = (video_list - self.new_length + 1) / float(self.num_segments)
                 offsets = np.array([int(tick / 2.0 + tick * x) for x in range(self.num_segments)])
             else:
                 offsets = np.zeros((self.num_segments,))
@@ -157,11 +158,17 @@ class TSNDataSet(data.Dataset):
             decode_boo = True
             try:
                 directory = record.path
-                if directory[-4:] != ".mp4":
-                    video_path = directory+".mp4"
-                else:
-                    video_path = directory
-                video_list = decord.VideoReader(video_path)
+                # if directory[-4:] != ".avi": # mp4,avi;but it so bad.
+                #     video_path = directory+".avi"
+                # elif directory[-4:] != ".mp4":
+                #     video_path = directory+".mp4"
+                # else:
+                video_path = directory
+                # print(video_path,index)
+                # video_list = decord.VideoReader(video_path)
+                video_list = cv2.VideoCapture(video_path)
+                num_frames = int(video_list.get(cv2.CAP_PROP_FRAME_COUNT))
+                
             except UnicodeDecodeError:
                 decode_boo = False
                 video_list = os.listdir(record.path)
@@ -169,33 +176,40 @@ class TSNDataSet(data.Dataset):
         
         if not self.test_mode:
             if self.I3D_sample :
-                segment_indices = self._sample_indices(video_list) 
+                segment_indices = self._sample_indices(num_frames) 
             else:
-                segment_indices = self._sample_indices(video_list) if self.random_shift else self._get_val_indices(video_list) 
+                segment_indices = self._sample_indices(num_frames) if self.random_shift else self._get_val_indices(num_frames) 
         else:
             if self.dataset == 'kinetics':
-                segment_indices = self._sample_indices(video_list)
+                segment_indices = self._sample_indices(num_frames)
             else:
-                segment_indices = self._get_test_indices(video_list)
+                segment_indices = self._get_test_indices(num_frames)
 
         
-        return self.get(record,video_list, segment_indices,decode_boo)
+        return self.get(record,video_list,num_frames, segment_indices,decode_boo)
 
-    def get(self, record,video_list, indices,decode_boo):
+    def get(self, record,video_list,num_frames, indices,decode_boo):
         images = list()
         for seg_ind in indices:
             p = int(seg_ind)
             for i in range(0,self.new_length,1):
                 if(decode_boo):
-                    seg_imgs = [Image.fromarray(video_list[p-1].asnumpy()).convert('RGB')]
+                    video_list.set(cv2.CAP_PROP_POS_FRAMES, p-1)
+                    _,cv2_im = video_list.read()
+                    if cv2_im is None:
+                        print(record.path)
+
+                    # seg_imgs = [Image.fromarray(video_list[p-1].asnumpy()).convert('RGB')]
+                    seg_imgs = cv2.cvtColor(cv2_im, cv2.COLOR_BGR2RGB)
+                    seg_imgs = Image.fromarray(cv2_im)
                 else:
                     seg_imgs = self._load_image(record.path,p)
-                images.extend(seg_imgs)
-                if((len(video_list)-self.new_length*1+1)>=8):
-                    if p < (len(video_list)):
+                images.append(seg_imgs)
+                if((num_frames-self.new_length*1+1)>=8):
+                    if p < (num_frames):
                         p += 1
                 else:
-                    if p < (len(video_list)):
+                    if p < (num_frames):
                         p += 1
 
         process_data, record_label = self.transform((images,record.label))
