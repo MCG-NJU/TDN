@@ -113,23 +113,24 @@ for this_weights, this_test_segments, test_file, modality, this_arch in zip(weig
               img_feature_dim=args.img_feature_dim,
               pretrain=args.pretrain
               )
+    # import pdb;pdb.set_trace()
+    checkpoint = torch.load(this_weights,) # torch.load(this_weights)['state_dict'].keys()==net.state_dict().keys():True
+    # try:
+    #     net.load_state_dict(checkpoint['state_dict'])
+    # except:
+    #     checkpoint = checkpoint['state_dict']
 
-    checkpoint = torch.load(this_weights)
-    try:
-        net.load_state_dict(checkpoint['state_dict'])
-    except:
-        checkpoint = checkpoint['state_dict']
+    #     base_dict = {'.'.join(k.split('.')[1:]): v for k, v in list(checkpoint.items())}
+    #     replace_dict = {'base_model.classifier.weight': 'new_fc.weight',
+    #                     'base_model.classifier.bias': 'new_fc.bias',
+    #                     }
+    #     for k, v in replace_dict.items():
+    #         if k in base_dict:
+    #             base_dict[v] = base_dict.pop(k)
 
-        base_dict = {'.'.join(k.split('.')[1:]): v for k, v in list(checkpoint.items())}
-        replace_dict = {'base_model.classifier.weight': 'new_fc.weight',
-                        'base_model.classifier.bias': 'new_fc.bias',
-                        }
-        for k, v in replace_dict.items():
-            if k in base_dict:
-                base_dict[v] = base_dict.pop(k)
+    #     net.load_state_dict(base_dict)
 
-        net.load_state_dict(base_dict)
-
+    net.load_state_dict(checkpoint['state_dict'],strict=True)
 
     input_size = net.scale_size if args.full_res else net.input_size
     if args.test_crops == 1:
