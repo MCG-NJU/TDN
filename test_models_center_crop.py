@@ -130,7 +130,9 @@ for this_weights, this_test_segments, test_file, modality, this_arch in zip(weig
 
     #     net.load_state_dict(base_dict)
 
-    net.load_state_dict(checkpoint['state_dict'],strict=True)
+
+
+    net.load_state_dict({k.replace('module.',''):v for k,v in checkpoint['state_dict'].items()},strict=True)
 
     input_size = net.scale_size if args.full_res else net.input_size
     if args.test_crops == 1:
