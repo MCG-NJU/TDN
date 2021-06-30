@@ -4,7 +4,7 @@
 # tongzhan@smail.nju.edu.cn
 
 import os
-ROOT_DATASET = '/ssd/video/' 
+ROOT_DATASET = './' 
 
 def return_ucf101(modality):
     filename_categories = 101
@@ -44,8 +44,8 @@ def return_something(modality):
     filename_categories = 174
     if modality == 'RGB' or modality== 'RGBDiff':
         root_data = "/" 
-        filename_imglist_train = "/your_path_to/something-something-v1-train_list.txt"
-        filename_imglist_val = "/your_path_to/something-something-v1-val_list.txt"
+        filename_imglist_train = "data/something-something-v1/train_videofolder.txt"
+        filename_imglist_val = "data/something-something-v1/val_videofolder.txt"
         prefix = '{:05d}.jpg'
     elif modality == 'Flow':
         root_data = ROOT_DATASET + '/your_path_to/something/v1/20bn-something-something-v1-flow'
@@ -62,8 +62,8 @@ def return_somethingv2(modality):
     filename_categories = 174 
     if modality == 'RGB':
         root_data = "/"
-        filename_imglist_train = "/your_path_to/something-something-v2-train_list.txt"
-        filename_imglist_val = "/your_path_to/something-something-v2-val_list.txt"
+        filename_imglist_train = "data/something-something-v2/train_videofolder.txt"
+        filename_imglist_val = "data/something-something-v2/val_videofolder.txt"
         prefix = '{:06d}.jpg'
     elif modality == 'Flow':
         root_data = ROOT_DATASET + 'something/v2/20bn-something-something-v2-flow'
