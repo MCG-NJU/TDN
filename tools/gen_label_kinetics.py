@@ -8,11 +8,11 @@
 import os
 
 
-dataset_path = '/ssd/video/kinetics/images256/'
-label_path = '/ssd/video/kinetics/labels'
+dataset_path = '/workspace/mnt/storage/hourenzheng/kinetics_images/kinetcis_frames/'
+label_path = 'data/kinetics400'
 
 if __name__ == '__main__':
-    with open('kinetics_label_map.txt') as f:
+    with open('tools/kinetics-400-map.txt') as f:
         categories = f.readlines()
         categories = [c.strip().replace(' ', '_').replace('"', '').replace('(', '').replace(')', '').replace("'", '') for c in categories]
     assert len(set(categories)) == 400
@@ -22,24 +22,24 @@ if __name__ == '__main__':
 
     print(dict_categories)
 
-    files_input = ['kinetics_val.csv', 'kinetics_train.csv']
+    files_input = ['kinetics-400-val.txt', 'kinetics-400-train.txt']#['kinetics_val.csv', 'kinetics_train.csv']
     files_output = ['val_videofolder.txt', 'train_videofolder.txt']
     for (filename_input, filename_output) in zip(files_input, files_output):
         count_cat = {k: 0 for k in dict_categories.keys()}
-        with open(os.path.join(label_path, filename_input)) as f:
-            lines = f.readlines()[1:]
+
+        # get ture labels
+        with open(os.path.join(label_path, filename_input)) as f1:
+            s1 = f1.readlines()
         folders = []
         idx_categories = []
         categories_list = []
-        for line in lines:
-            line = line.rstrip()
-            items = line.split(',')
-            folders.append(items[1] + '_' + items[2])
-            this_catergory = items[0].replace(' ', '_').replace('"', '').replace('(', '').replace(')', '').replace("'", '')
-            categories_list.append(this_catergory)
-            idx_categories.append(dict_categories[this_catergory])
-            count_cat[this_catergory] += 1
-        print(max(count_cat.values()))
+        for s2 in s1:
+            train = s2.rstrip().split(' ')[0].split('/')[-1].split('.')[0]
+            train_label = s2.rstrip().split(' ')[0].split('/')[-2].strip().replace(' ', '_').replace('"', '').replace('(', '').replace(')', '').replace("'", '')
+            folders.append(train)
+            categories_list.append(train_label)
+            idx_categories.append(dict_categories[train_label])
+
 
         assert len(idx_categories) == len(folders)
         missing_folders = []
