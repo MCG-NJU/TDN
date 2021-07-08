@@ -23,7 +23,7 @@ if __name__ == '__main__':
     print(dict_categories)
 
     files_input = ['kinetics-400-val.txt', 'kinetics-400-train.txt']#['kinetics_val.csv', 'kinetics_train.csv']
-    files_output = ['val_videofolder.txt', 'train_videofolder.txt']
+    files_output = ['new_val_videofolder.txt', 'new_train_videofolder.txt']
     for (filename_input, filename_output) in zip(files_input, files_output):
         count_cat = {k: 0 for k in dict_categories.keys()}
 
