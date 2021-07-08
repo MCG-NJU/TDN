@@ -94,7 +94,7 @@ but origin is :top1=52.3%; maybe our parameters is not good; and found lr and wd
 
 
 ## somthingv2
-### TDN_resnet50_lr(0.01)_epoch(100)-top1=(8x1x1)
+### TDN_resnet50_lr(0.01)_epoch(100)-top1=63.91(8x1x1)
 2021.07.08
 [TDN__somethingv2_RGB_resnet50_avg_segment8_e100](log/TDN__somethingv2_RGB_resnet50_avg_segment8_e100/TDN__somethingv2_RGB_resnet50_avg_segment8_e100.png)
 `just like below, one epoch cost 1.52h when we trained in 2*nvidia2080ti batch(8); 100 epoch cost 1d20h 3m 32s.`
