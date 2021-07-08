@@ -147,11 +147,21 @@ class TSNDataSet(data.Dataset):
             return offsets + 1
 
     def __getitem__(self, index):
+        # import pdb;pdb.set_trace()
         record = self.video_list[index]
         
         if('something' in self.dataset): 
             decode_boo = False
             video_list = os.listdir(record.path)
+        elif('kinetics_frame' in self.dataset): # just fro train kineticis frame.
+            decode_boo = False
+            split_list = record.path.strip().split('/')
+            img_name = record.path.strip().split('/')[-1] #'img_' + record.path.strip().split('/')[-1]
+            split_list[-1] = img_name
+            img_path = '/'.join(split_list)
+
+            video_list = os.listdir(img_path)
+            # print(video_list)
         
         else:
             decode_boo = True
@@ -173,7 +183,7 @@ class TSNDataSet(data.Dataset):
             else:
                 segment_indices = self._sample_indices(video_list) if self.random_shift else self._get_val_indices(video_list) 
         else:
-            if self.dataset == 'kinetics':
+            if ('kinetics' in self.dataset):
                 segment_indices = self._sample_indices(video_list)
             else:
                 segment_indices = self._get_test_indices(video_list)
