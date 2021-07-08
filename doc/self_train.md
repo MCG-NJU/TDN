@@ -1,6 +1,7 @@
 ## somthing
-2021.0629
 
+### TDN_resnet50_lr(0.02)_epoch(100)-top1=49.64(8x1x1)
+2021.0629
 `just like below, one epoch cost 1.52h when we trained in 2*nvidia2080ti batch(8); 100 epoch cost 3day 6h.`
 
 `python -m torch.distributed.launch --master_port 12347 --nproc_per_node=2 \
@@ -77,3 +78,16 @@ video 11520 done, total 11520/11522, average 0.00702 sec/video, moving Prec@1 49
 Overall Prec@1 49.64% Prec@5 78.68%
 
 but origin is :top1=52.3%; maybe our parameters is not good; and found lr and wd is not good; the origin paper use `lr=0.01,wd=5e-4,--lr_steps  30 45 55 --epochs 60`, our lr is double of paper, maybe this is reason.
+
+
+### TDN_resnet50_lr(0.01)_epoch(60)-top1=49.64(8x1x1)
+2021.0629
+`just like below, one epoch cost 1.52h when we trained in 2*nvidia2080ti batch(8); 100 epoch cost 3day 6h.`
+
+`python -m torch.distributed.launch --master_port 12347 --nproc_per_node=8 \`
+`            main.py  something  RGB --arch resnet50 --num_segments 8 --gd 20 --lr 0.01 \`
+ `           --lr_scheduler step --lr_steps  30 45 55 --epochs 60 --batch-size 8 \`
+ `           --wd 5e-4 --dropout 0.5 --consensus_type=avg --eval-freq=1 -j 4 --npb`
+
+- 8x1x1
+`Overall Prec@1 52.23% Prec@5 80.32%; but origin is :top1=52.3%;`
