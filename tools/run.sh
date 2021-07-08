@@ -1,0 +1,1 @@
+nohup python -u vid2img_sthv2.py > out.out 2>&1 &
