@@ -97,7 +97,7 @@ but origin is :top1=52.3%; maybe our parameters is not good; and found lr and wd
 ### TDN_resnet50_lr(0.01)_epoch(100)-top1=(8x1x1)
 2021.07.08
 [TDN__somethingv2_RGB_resnet50_avg_segment8_e100](log/TDN__somethingv2_RGB_resnet50_avg_segment8_e100/TDN__somethingv2_RGB_resnet50_avg_segment8_e100.png)
-`just like below, one epoch cost 1.52h when we trained in 2*nvidia2080ti batch(8); 100 epoch cost 3day 6h.`
+`just like below, one epoch cost 1.52h when we trained in 2*nvidia2080ti batch(8); 100 epoch cost 1d20h 3m 32s.`
 
 `python -m torch.distributed.launch --master_port 12347 --nproc_per_node=8 \`
             `main.py  somethingv2  RGB --arch resnet50 --num_segments 8 --gd 20 --lr 0.01 \`
@@ -105,4 +105,4 @@ but origin is :top1=52.3%; maybe our parameters is not good; and found lr and wd
             `--wd 5e-4 --dropout 0.5 --consensus_type=avg --eval-freq=1 -j 4 --npb`
 
 - 8x1x1
-`Overall Prec@1 52.23% Prec@5 80.32%; but origin is :top1=64.0%;`
+`Overall Prec@1 63.91% Prec@5 88.80%; but origin is top1=64.0%;`
