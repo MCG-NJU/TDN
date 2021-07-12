@@ -26,7 +26,7 @@ from tensorboardX import SummaryWriter
 from torch.utils.data import *
 import torchvision
 
-os.environ['CUDA_VISIBLE_DEVICES'] = '0,1' # 0,1,2,3,4,5,6,7
+os.environ['CUDA_VISIBLE_DEVICES'] = '0,1,2,3,4,5,6,7' # 0,1,2,3,4,5,6,7
 
 best_prec1 = 0
 
