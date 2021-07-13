@@ -188,7 +188,8 @@ class TSNDataSet(data.Dataset):
             else:
                 segment_indices = self._get_test_indices(video_list)
 
-        
+        # import pdb;pdb.set_trace()
+        # print(segment_indices)
         return self.get(record,video_list, segment_indices,decode_boo)
 
     def get(self, record,video_list, indices,decode_boo):
@@ -207,8 +208,8 @@ class TSNDataSet(data.Dataset):
                 else:
                     if p < (len(video_list)):
                         p += 1
-
         process_data, record_label = self.transform((images,record.label))
+
 
         return process_data, record_label
 

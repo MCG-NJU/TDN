@@ -17,7 +17,7 @@ model_urls = {
 }
 
 
-class mSEModule(nn.Module):
+class mSEModule(nn.Module): # long-term tdm op
     def __init__(self, channel, n_segment=8,index=1):
         super(mSEModule, self).__init__()
         self.channel = channel
@@ -103,7 +103,7 @@ class mSEModule(nn.Module):
         y_forward_smallscale4 = self.bn3_smallscale4(self.conv3_smallscale4(y_forward_smallscale4))
         y_backward_smallscale4 = self.bn3_smallscale4(self.conv3_smallscale4(y_backward_smallscale4))
         
-        y_forward_smallscale2 = F.interpolate(y_forward_smallscale2, diff_fea_pluszero_forward.size()[2:])
+        y_forward_smallscale2 = F.interpolate(y_forward_smallscale2, diff_fea_pluszero_forward.size()[2:]) # 两次采样给long-term tdm;目的是对齐要操作的两个tenor
         y_backward_smallscale2 = F.interpolate(y_backward_smallscale2, diff_fea_pluszero_backward.size()[2:])
         
         y_forward = self.bn3(self.conv3(1.0/3.0*diff_fea_pluszero_forward + 1.0/3.0*y_forward_smallscale2 + 1.0/3.0*y_forward_smallscale4))# nt, c, 1, 1
