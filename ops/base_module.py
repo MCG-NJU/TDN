@@ -9,7 +9,7 @@ import torch.nn.functional as F
 import math
 import torch.utils.model_zoo as model_zoo
 
-__all__ = ['FBResNet', 'fbresnet50', 'fbresnet101']
+__all__ = ['FBResNet', 'fbresnet18', 'fbresnet50', 'fbresnet101']
 
 model_urls = {
         'fbresnet50': 'http://data.lip6.fr/cadene/pretrainedmodels/resnet50-19c8e357.pth',
@@ -353,6 +353,20 @@ class FBResNet(nn.Module):
         x = self.logits(x)
         return x
 
+
+def fbresnet18(num_segments=8,pretrained=False,num_classes=1000):
+    """Constructs a ResNet-18 model.
+
+    Args:
+        pretrained (bool): If True, returns a model pre-trained on ImageNet
+    """
+    model = FBResNet(num_segments,BottleneckShift, [2, 2, 2, 2], num_classes=num_classes)
+    if pretrained:
+        #  model.load_state_dict(model_zoo.load_url(model_urls['fbresnet18']),strict=False)
+        model = model
+    return model
+
+
 def fbresnet50(num_segments=8,pretrained=False,num_classes=1000):
     """Constructs a ResNet-50 model.
 
@@ -375,4 +389,3 @@ def fbresnet101(num_segments,pretrained=False,num_classes=1000):
     if pretrained:
         model.load_state_dict(model_zoo.load_url(model_urls['fbresnet101']),strict=False)
     return model
-
