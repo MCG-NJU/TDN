@@ -15,7 +15,7 @@ class TSN(nn.Module):
                  base_model='resnet101', new_length=None,
                  consensus_type='avg', before_softmax=True,
                  dropout=0.8, img_feature_dim=256,crop_num=1,
-                 partial_bn=True, print_spec=True, pretrain='imagenet',fc_lr5=False):
+                 partial_bn=True, print_spec=True, pretrain=False, fc_lr5=False):
         super(TSN, self).__init__()
         self.modality = modality
         self.num_segments = num_segments
@@ -49,7 +49,7 @@ class TSN(nn.Module):
         img_feature_dim:    {}
             """.format(base_model, self.modality, self.num_segments, self.new_length, consensus_type, self.dropout, self.img_feature_dim)))
 
-        self._prepare_base_model(base_model, self.num_segments)
+        self._prepare_base_model(base_model, self.num_segments, self.pretrain)
         feature_dim = self._prepare_tsn(num_class)
         self.consensus = ConsensusModule(consensus_type)
 
@@ -81,10 +81,10 @@ class TSN(nn.Module):
         
         return feature_dim
 
-    def _prepare_base_model(self, base_model, num_segments):
+    def _prepare_base_model(self, base_model, num_segments, pretrained):
         print(('=> base model: {}'.format(base_model)))
         if 'resnet' in base_model :
-            self.base_model = tdn_net(base_model, num_segments)
+            self.base_model = tdn_net(base_model, num_segments, pretrained)
             self.base_model.last_layer_name = 'fc'
             self.input_size = 224
             self.input_mean = [0.485, 0.456, 0.406]

@@ -24,7 +24,7 @@ parser.add_argument('--loss_type', type=str, default="nll", choices=['nll'])
 parser.add_argument('--img_feature_dim', default=256, type=int,
                     help="the feature dimension for each frame")
 parser.add_argument('--suffix', type=str, default=None)
-parser.add_argument('--pretrain', type=str, default='imagenet')
+parser.add_argument('--pretrain', type=str, default=True)
 parser.add_argument('--tune_from', type=str, default=None,
                     help='fine-tune from checkpoint')
 parser.add_argument('--experiment_name', type=str, default='TDN')
