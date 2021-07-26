@@ -225,3 +225,21 @@ but origin is :top1=52.3%; maybe our parameters is not good; and found lr and wd
 `Overall Prec@1 61.19% Prec@5 83.69%` 
 -  `61.43` with [3x1x1](resnet18)
 - rise `15.44` with [1x3x1](resnet18)
+
+
+- 9x3x1(Frames*crops*clips)
+### TDN_resnet18_lr(0.01)_epoch(100)-top1=45.75%(9x3x1)(no pretrained from imagenet)
+2021.07.26
+[TDN__kinetics_frame_RGB_resnet18_avg_segment9_e100](log/TDN__kinetics_frame_RGB_resnet18_avg_segment9_e100_True/log.txt)
+`07/19`
+
+`CUDA_VISIBLE_DEVICES=0,1 python test_models_three_crops.py  kinetics_frame \`
+`--archs='resnet18' --weights  --test_segments=9 \`
+`--test_crops=3 --clip_index 0 --batch_size=16 --full_res --output_dir ./result  \`
+`-j 4`
+`python pkl_to_results.py --num_clips 1 --test_crops 3 --output_dir ./result`
+
+
+`Overall Prec@1 71.30% Prec@5 90.11%` 
+-  `70` with [9x1x1](resnet18)
+- rise `10.11` with [3x3x1](resnet18)
