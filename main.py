@@ -273,7 +273,7 @@ def train(train_loader, model, criterion, optimizer, epoch, logger=None, schedul
         target_var = target
         output = model(input_var)
         loss = criterion(output, target_var)
-        prec1, prec5 = accuracy(output.data, target, topk=(1, 5))
+        prec1, prec5 = accuracy(output.data, target, topk=(1, args.topk))
 
         losses.update(loss.item(), input.size(0))
         top1.update(prec1.item(), input.size(0))
@@ -318,7 +318,7 @@ def validate(val_loader, model, criterion, logger=None):
             output = model(input)
 
             loss = criterion(output, target)
-            prec1, prec5 = accuracy(output.data, target, topk=(1, 5))
+            prec1, prec5 = accuracy(output.data, target, topk=(1, args.topk))
 
             loss = reduce_tensor(loss)
             prec1 = reduce_tensor(prec1)

@@ -38,6 +38,7 @@ parser.add_argument('-j', '--workers', default=8, type=int, metavar='N',
                     help='number of data loading workers (default: 8)')
 
 # for true test
+parser.add_argument('--topk', type=int, default=5)
 parser.add_argument('--test_list', type=str, default=None)
 parser.add_argument('--csv_file', type=str, default=None)
 parser.add_argument('--softmax', default=False, action="store_true", help='use softmax')
@@ -293,9 +294,9 @@ for i, data_label_pairs in enumerate(zip(*data_iter_list)):
         for p, g in zip(ensembled_predict2, this_label.cpu().numpy()):
             output2.append([p[None, ...], g])
         cnt_time = time.time() - proc_start_time
-        prec01, prec05 = accuracy(torch.from_numpy(ensembled_predict0), this_label, topk=(1, 5))
-        prec11, prec15 = accuracy(torch.from_numpy(ensembled_predict1), this_label, topk=(1, 5))
-        prec21, prec25 = accuracy(torch.from_numpy(ensembled_predict2), this_label, topk=(1, 5))
+        prec01, prec05 = accuracy(torch.from_numpy(ensembled_predict0), this_label, topk=(1, args.topk))
+        prec11, prec15 = accuracy(torch.from_numpy(ensembled_predict1), this_label, topk=(1, args.topk))
+        prec21, prec25 = accuracy(torch.from_numpy(ensembled_predict2), this_label, topk=(1, args.topk))
         top01.update(prec01.item(), this_label.numel())
         top05.update(prec05.item(), this_label.numel())
         top11.update(prec11.item(), this_label.numel())
