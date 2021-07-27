@@ -231,7 +231,7 @@ but origin is :top1=52.3%; maybe our parameters is not good; and found lr and wd
 ### TDN_resnet18_lr(0.01)_epoch(100)-top1=45.75%(9x3x1)(no pretrained from imagenet)
 2021.07.26
 [TDN__kinetics_frame_RGB_resnet18_avg_segment9_e100](log/TDN__kinetics_frame_RGB_resnet18_avg_segment9_e100_True/log.txt)
-`07/19`
+`07/26`
 
 `CUDA_VISIBLE_DEVICES=0,1 python test_models_three_crops.py  kinetics_frame \`
 `--archs='resnet18' --weights  --test_segments=9 \`
