@@ -23,6 +23,23 @@ def return_ucf101(modality):
     return filename_categories, filename_imglist_train, filename_imglist_val, root_data, prefix
 
 
+def return_high_events(modality):
+    filename_categories = 2
+    if modality == 'RGB':
+        root_data = "/"#ROOT_DATASET
+        filename_imglist_train = "data/high-events/shuf_train_A.txt"
+        filename_imglist_val = "data/high-events/shuf_val_A.txt"
+        prefix = 'image_{:05d}.jpg'
+    elif modality == 'Flow':
+        root_data = ROOT_DATASET + 'UCF101/jpg'
+        filename_imglist_train = 'file_list/ucf101_flow_train_split_3.txt'
+        filename_imglist_val = 'file_list/ucf101_flow_val_split_3.txt'
+        prefix = 'flow_{}_{:05d}.jpg'
+    else:
+        raise NotImplementedError('no such modality:' + modality)
+    return filename_categories, filename_imglist_train, filename_imglist_val, root_data, prefix
+
+
 def return_hmdb51(modality):
     filename_categories = 51
     if modality == 'RGB':
@@ -119,7 +136,8 @@ def return_kinetics_frame(modality):
 def return_dataset(dataset, modality):
     dict_single = {'jester': return_jester, 'something': return_something, 'somethingv2': return_somethingv2,
                    'ucf101': return_ucf101, 'hmdb51': return_hmdb51,
-                   'kinetics': return_kinetics,'kinetics_frame':return_kinetics_frame }
+                   'kinetics': return_kinetics,'kinetics_frame':return_kinetics_frame,
+                   'high_events':return_high_events }
     if dataset in dict_single:
         file_categories, file_imglist_train, file_imglist_val, root_data, prefix = dict_single[dataset](modality)
     else:
