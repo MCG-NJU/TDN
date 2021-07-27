@@ -33,6 +33,7 @@ def accuracy(output, target, topk=(1,)):
 
 
 parser = argparse.ArgumentParser(description="TDN testing on the full validation set")
+parser.add_argument('--topk', type=int, default=5)
 parser.add_argument('--test_crops', type=int, default=1)
 parser.add_argument('--num_clips', type=int, default=10)
 parser.add_argument('--multi_segments',type=bool,default=False)
@@ -93,6 +94,6 @@ if(args.multi_segments):
 
 ens_pred_numpy = ens_pred_numpy / (num_clips*num_crops)
 ens_label_numpy = ens_label_numpy / (int(num_clips)*int(num_crops))
-prec1, prec5 = accuracy(torch.from_numpy(ens_pred_numpy), torch.from_numpy(ens_label_numpy).type(torch.LongTensor), topk=(1, 5))
+prec1, prec5 = accuracy(torch.from_numpy(ens_pred_numpy), torch.from_numpy(ens_label_numpy).type(torch.LongTensor), topk=(1, args.topk))
 print('-----Evaluation is finished------')
 print('Overall Prec@1 {:.02f}% Prec@5 {:.02f}%'.format(prec1, prec5))
