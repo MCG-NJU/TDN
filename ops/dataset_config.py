@@ -24,11 +24,11 @@ def return_ucf101(modality):
 
 
 def return_high_events(modality):
-    filename_categories = 2
+    filename_categories = 3
     if modality == 'RGB':
         root_data = "/"#ROOT_DATASET
-        filename_imglist_train = "data/high-events/shuf_train_A.txt"
-        filename_imglist_val = "data/high-events/shuf_val_A.txt"
+        filename_imglist_train = "data/high-events/train_A.txt"
+        filename_imglist_val = "data/high-events/val_A.txt" # data/high-events/shuf_val_A.txt
         prefix = 'image_{:05d}.jpg'
     elif modality == 'Flow':
         root_data = ROOT_DATASET + 'UCF101/jpg'
