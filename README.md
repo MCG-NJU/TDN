@@ -131,11 +131,13 @@ This repository is released under the Apache-2.0. license as found in the [LICEN
 ## Citation
 If you think our work is useful, please feel free to cite our paper 😆 :
 ```
-@article{wang2020tdn,
-      title={TDN: Temporal Difference Networks for Efficient Action Recognition}, 
-      author={Limin Wang and Zhan Tong and Bin Ji and Gangshan Wu},
-      journal={arXiv preprint arXiv:2012.10071},
-      year={2020}
+@InProceedings{Wang_2021_CVPR,
+    author    = {Wang, Limin and Tong, Zhan and Ji, Bin and Wu, Gangshan},
+    title     = {TDN: Temporal Difference Networks for Efficient Action Recognition},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+    month     = {June},
+    year      = {2021},
+    pages     = {1895-1904}
 }
 ```
 
