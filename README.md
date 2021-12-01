@@ -6,6 +6,8 @@ We release the PyTorch code of the [TDN](https://arxiv.org/abs/2012.10071)(Tempo
 
 **TL; DR.** We generalize the idea of RGB difference to devise an efficient temporal difference module (TDM) for motion modeling in videos, and provide an alternative to 3D convolutions by systematically presenting principled and detailed module design.
 
+**[Dec 1, 2021]**  We update the TDN-ResNet101 on **SSV2** in model zoo.
+
 **[Mar 5, 2021]**  TDN has been accepted by **CVPR 2021**.
 
 **[Dec 26, 2020]**  We have released the PyTorch code of TDN.
@@ -73,11 +75,11 @@ Model  | Frames x Crops x Clips | Top-1  | Top-5 | checkpoint
 TDN-ResNet50  | 8x1x1   | 64.0%   | 88.8%  | [link](https://drive.google.com/drive/folders/14pZ1W_Mh8nR4e1ziEz7AFpgbz-79HpIC?usp=sharing)
 TDN-ResNet50  | 16x1x1  | 65.3%   | 89.7%  | [link](https://drive.google.com/drive/folders/1AQOyCiRR9I50YIKHYc5E9q29J1ROe22A?usp=sharing)
 TDN-ResNet101  | 8x1x1   | 65.8%   | 90.2%  | [link](https://drive.google.com/drive/folders/1N4EojVdHFfNbEU_4WIkT_26d_mSHimmo?usp=sharing)
-               | 8x3x1   | 67.1%   | 90.5%  | -
+ |  | 8x3x1   | 67.1%   | 90.5%  | -
 TDN-ResNet101  | 16x1x1  | 66.9%   | 90.9%  | [link](https://drive.google.com/file/d/1RBzJvE2tGZgnN8Yl4EGj2uFwMECTbIdn/view?usp=sharing)
-               | 8x3x1   | 68.2%   | 91.6%  | -
+| | 8x3x1   | 68.2%   | 91.6%  | -
 TDN-ResNet101  | (8+16)x1x1  | 68.2%   |  91.6%  | -
-               | (8+16)x3x1   | 69.6%   | 92.2%  | -
+| | (8+16)x3x1   | 69.6%   | 92.2%  | -
 #### Kinetics400
 Model  | Frames x Crops x Clips   | Top-1 (30 view)  | Top-5 (30 view)  | checkpoint
 :--: | :--: | :--: | :--:| :--:
