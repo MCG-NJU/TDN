@@ -72,7 +72,12 @@ Model  | Frames x Crops x Clips | Top-1  | Top-5 | checkpoint
 :--: | :--: | :--: | :--:| :--:
 TDN-ResNet50  | 8x1x1   | 64.0%   | 88.8%  | [link](https://drive.google.com/drive/folders/14pZ1W_Mh8nR4e1ziEz7AFpgbz-79HpIC?usp=sharing)
 TDN-ResNet50  | 16x1x1  | 65.3%   | 89.7%  | [link](https://drive.google.com/drive/folders/1AQOyCiRR9I50YIKHYc5E9q29J1ROe22A?usp=sharing)
-
+TDN-ResNet101  | 8x1x1   | 65.8%   | 90.2%  | [link](https://drive.google.com/drive/folders/1N4EojVdHFfNbEU_4WIkT_26d_mSHimmo?usp=sharing)
+               | 8x3x1   | 67.1%   | 90.5%  | -
+TDN-ResNet101  | 16x1x1  | 66.9%   | 90.9%  | [link](https://drive.google.com/file/d/1RBzJvE2tGZgnN8Yl4EGj2uFwMECTbIdn/view?usp=sharing)
+               | 8x3x1   | 68.2%   | 91.6%  | -
+TDN-ResNet101  | (8+16)x1x1  | 68.2%   |  91.6%  | -
+               | (8+16)x3x1   | 69.6%   | 92.2%  | -
 #### Kinetics400
 Model  | Frames x Crops x Clips   | Top-1 (30 view)  | Top-5 (30 view)  | checkpoint
 :--: | :--: | :--: | :--:| :--:
