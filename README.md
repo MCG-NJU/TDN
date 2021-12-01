@@ -1,6 +1,10 @@
 # TDN: Temporal Difference Networks for Efficient Action Recognition (CVPR 2021)
 
 ![1](https://github.com/MCG-NJU/TDN/blob/main/TDM.jpg)  
+
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/tdn-temporal-difference-networks-for/action-recognition-in-videos-on-something)](https://paperswithcode.com/sota/action-recognition-in-videos-on-something?p=tdn-temporal-difference-networks-for)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/tdn-temporal-difference-networks-for/action-recognition-in-videos-on-something-1)](https://paperswithcode.com/sota/action-recognition-in-videos-on-something-1?p=tdn-temporal-difference-networks-for)
+
 ## Overview
 We release the PyTorch code of the [TDN](https://arxiv.org/abs/2012.10071)(Temporal Difference Networks). This code is based on the [TSN](https://github.com/yjxiong/tsn-pytorch) and [TSM](https://github.com/mit-han-lab/temporal-shift-module) codebase. The core code to implement the Temporal Difference Module are `ops/base_module.py` and `ops/tdn_net.py`.
 
