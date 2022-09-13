@@ -2,19 +2,19 @@
 
 ![1](https://github.com/MCG-NJU/TDN/blob/main/TDM.jpg)  
 
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/tdn-temporal-difference-networks-for/action-recognition-in-videos-on-something)](https://paperswithcode.com/sota/action-recognition-in-videos-on-something?p=tdn-temporal-difference-networks-for)
+[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/tdn-temporal-difference-networks-for/action-recognition-in-videos-on-something)](https://paperswithcode.com/sota/action-recognition-in-videos-on-something?p=tdn-temporal-difference-networks-for)<br>
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/tdn-temporal-difference-networks-for/action-recognition-in-videos-on-something-1)](https://paperswithcode.com/sota/action-recognition-in-videos-on-something-1?p=tdn-temporal-difference-networks-for)
+
+## News
+**[Mar 24, 2022]** We present the [VideoMAE](https://github.com/MCG-NJU/VideoMAE), achieving **SOTA** on Kinetics, Something-Something, and AVA. <br>
+**[Dec 1, 2021]**  We update the TDN-ResNet101 on **SSV2** in model zoo. <br>
+**[Mar 5, 2021]**  TDN has been accepted by **CVPR 2021**. <br>
+**[Dec 26, 2020]**  We have released the PyTorch code of TDN. <br>
 
 ## Overview
 We release the PyTorch code of the [TDN](https://arxiv.org/abs/2012.10071)(Temporal Difference Networks). This code is based on the [TSN](https://github.com/yjxiong/tsn-pytorch) and [TSM](https://github.com/mit-han-lab/temporal-shift-module) codebase. The core code to implement the Temporal Difference Module are `ops/base_module.py` and `ops/tdn_net.py`.
 
 **TL; DR.** We generalize the idea of RGB difference to devise an efficient temporal difference module (TDM) for motion modeling in videos, and provide an alternative to 3D convolutions by systematically presenting principled and detailed module design.
-
-**[Dec 1, 2021]**  We update the TDN-ResNet101 on **SSV2** in model zoo.
-
-**[Mar 5, 2021]**  TDN has been accepted by **CVPR 2021**.
-
-**[Dec 26, 2020]**  We have released the PyTorch code of TDN.
 
 * [Prerequisites](#prerequisites)
 * [Data Preparation](#data-preparation)
