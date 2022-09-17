@@ -6,7 +6,7 @@
 [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/tdn-temporal-difference-networks-for/action-recognition-in-videos-on-something-1)](https://paperswithcode.com/sota/action-recognition-in-videos-on-something-1?p=tdn-temporal-difference-networks-for)
 
 ## News
-**[Mar 24, 2022]** We present the [VideoMAE](https://github.com/MCG-NJU/VideoMAE), achieving **SOTA** on Kinetics, Something-Something, and AVA. <br>
+**[Mar 24, 2022]** We present [VideoMAE](https://arxiv.org/abs/2203.12602), a new **SOTA** on Kinetics, Something-Something, and AVA. <br>
 **[Dec 1, 2021]**  We update the TDN-ResNet101 on **SSV2** in model zoo. <br>
 **[Mar 5, 2021]**  TDN has been accepted by **CVPR 2021**. <br>
 **[Dec 26, 2020]**  We have released the PyTorch code of TDN. <br>
